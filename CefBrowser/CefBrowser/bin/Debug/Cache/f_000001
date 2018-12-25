@@ -1,0 +1,422 @@
+function countDown(){
+	bus.time -= 60;
+	heartbeat(bus.time);
+	if(bus.time<=0){
+        $get(url("exam/submitQuestion"), {token: bus.token});
+        fpost(url("exam/submitPaper"), {token: bus.token});
+        setTimeout(function() {
+            window.wxc.xcConfirm("考试时间已经结束", window.wxc.xcConfirm.typeEnum.info, {}, function() {
+                window.location.href = "about:blank";
+            });
+            jsobj.closeClock();
+            jsobj.exit();
+        }, 1000);
+    }
+}
+function heartbeat(){var dat={token:bus.token,timeleft:bus.time};$get(url("stu/heartbeat"),dat);}
+
+function initLeft(){
+    var $result = $get(url("exam/getTitle"),{token:bus.token});
+
+    if($result.code!=500&&$result.data.desc!=undefined){
+        var it = '<button id="examdesc">考试说明</button><br/>';
+        $("#sub").before(it);
+        //$("#desc").append($result.data.desc);
+        window.desc = $result.data.desc;
+        $('#desc').show();
+        $("#examdesc").click(function(){$("#desc").show();});
+    }
+    var list = $result.data.titles;
+    bus.outlineids = [];
+    for(var i=0;i<list.total;i++){
+        var indextitle = list[cn_char[i+1]];
+        var it = '<span id="q{a}">{b}、{c}（{d}分）</span><br />'
+            .format({
+                a:i+1,
+                b:cn_char[i+1],
+                c:indextitle.title,
+                d:indextitle.score/100
+            });
+        $("#sub").before(it);
+        bus.outlineids.push(indextitle.outlineId);
+        if(indextitle.outlineId==bus.outlineid){
+            bus.outlineindex = i;
+        }
+    }
+    if(bus.outlineindex == bus.outlineids.length-1)
+        $("#submit").html("提交答案<br/>结束考试");
+}
+function initRight(){
+    $("#right").empty();
+    var $result = $get(url("exam/getOutline"),{token:bus.token,outlineid:bus.outlineid});
+    if($result.code==500){
+        window.wxc.xcConfirm($result.msg, window.wxc.xcConfirm.typeEnum.info, {}, function() {
+            jsobj.closeClock();
+            jsobj.exit();
+        });
+    }
+    var answers = $result.data.answer;
+    delete $result.data.answer;
+    function render(obj,seq){
+    	
+        var div = document.createElement("div");
+        div.setAttribute("class","boder");
+       
+       if(obj.quesType==4){
+
+                var it = '<button data-seq="{seq}" id="btn" onclick="openPage(\'{url}\',this)">答题 </button>'.format({url:obj.thirdpartyParam,seq:seq});
+                echo(obj.thirdpartyParam);
+                $(div).append(it);
+
+        }
+       
+       if(obj.quesType==5){
+
+           if(obj.thirdpartyParam !=null){
+               var btn = document.createElement("button");
+               btn.setAttribute("type","button");
+               btn.innerText='打开'+obj.thirdpartyParam;
+               btn.setAttribute("data-param",obj.thirdpartyParam);
+               btn.onclick=function(){jsobj.program(this.getAttribute("data-param"),bus.time);}
+               //div.appendChild(btn);
+               $(div).append(btn);
+
+           }
+           if(obj.withFile == "y"){
+               var file = document.createElement("input");
+               file.setAttribute("type","file");
+               file.setAttribute("value","提交文件");
+               file.setAttribute("multiple","multiple");
+               file.setAttribute("data-seq",obj.questionNo);
+               file.onchange=function() {
+                   var fd = new FormData();
+                   fd.append("token", bus.token);
+                   fd.append("seq", this.getAttribute("data-seq"));
+                   fd.append("file", this.files[0]);
+                   $(this).after('\n' +
+                       '\t\t<div style="height: 20px;width: 200px;background-color: #AAA;">\n' +
+                       '\t\t\t<div id="progressbar" style="height: 100%;width: 0%;background-color: deepskyblue;"></div>\n' +
+                       '\t\t</div>');
+                   $.ajax({
+                       url: url("exam/saveFile"),
+                       type: "POST",
+                       processData: false,
+                       contentType: false,
+                       async: true,dataType:"json",data: fd,
+                       xhr:function(){
+                           myXhr = $.ajaxSettings.xhr();
+                           if(myXhr.upload){ // check if upload property exists
+                               myXhr.upload.addEventListener('progress',function(e){
+                                   var loaded = e.loaded;                  //已经上传大小情况
+                                   var total = e.total;                      //附件总大小
+                                   var percent = Math.floor(100*loaded/total)+"%";     //已经上传的百分比
+                                   $("#progressbar").css("width",percent);
+                               }, false); // for handling the progress of the upload
+                           }
+                           return myXhr;
+                       },
+                       success: function(rep) {if(rep.code==200||rep.code==204){setTimeout('alert("提交成功")',100);}}});
+               }
+               div.appendChild(file);
+               $(div).append("<br/>");
+           }
+
+        }
+        if(seq!=undefined){$(div).append(formatOrder(seq));}
+        if(obj.title != undefined){$(div).append(obj.title+"<br/>"); delete obj.title;}
+        if(obj.desc != undefined){$(div).append(obj.desc);delete obj.desc;}
+       // if(obj.html != undefined){var h = pobj.html;$(div).apend(h);delete obj.html;}
+        if(obj.html != undefined){var h = obj.html;$(div).append(h);delete obj.html;}
+        var children = obj.children;
+       if(children!=undefined){
+           var len = children.length;
+           for(var i =0;i<len;i++){
+               var item = children[i];
+               div.appendChild(render(item, item.seq));
+           }
+       }
+       if(obj.quesType==6){
+          var param = "meterquer.exe cid='"+$("#cid").html()+"' seq='"+seq+"' "+obj.thirdpartyParam;
+           if(param.indexOf("figure")> 0 ){         	
+         	 	$(div).append("<input style='width:150px;height:auto;'  type='button' value='获取实验值和图' onclick='meterstart(\""+param+"\",this)'><br/>");
+           }else{
+           		$(div).append("<input style='width:150px;height:auto;' type='button' value='获取实验值' onclick='meterstart(\""+param+"\",this)'><br/>");
+           }
+           if($post(url("exam/checkInit"),{token:bus.token}).data){
+                jsobj.start("meter_query.exe init");
+           }
+        }
+        return div;
+    }window.right.innerText="";
+    window.right.appendChild(render($result.data,undefined));
+    window.right.appendChild(document.createElement("br"));
+    window.right.appendChild(document.createElement("br"));
+    window.right.appendChild(document.createElement("br"));
+
+    for(var key in answers){
+        $("#"+key).val(answers[key]);
+    }
+    bind();
+}
+function bind() {
+    $("input.charpack,input.numpack").change(function(){
+        var ib = this.id.split("_");
+        var data = {token:bus.token,seq:this.name,questionNo:ib[0]+"_"+ib[1]};
+        var name = this.name;
+        var answer = [];
+        $("input[name='"+name+"']").each(function () {
+            var v = this.value;
+            if(undefined != v && "" != v){
+                answer.push(v.trim());
+            }
+        });
+        data.answer = answer.join(" ");
+        fpost("/exam/saveAnswer",data);
+    });
+
+    $("input.radio,input.newSelect").change(function(){
+        var ib = this.id.split("_");
+        var data = {
+            token:bus.token,
+            answer:this.value,
+            seq: this.name,
+            questionNo:ib[0]+"_"+ib[1]
+        };
+        fpost(url("exam/saveAnswer"),data);
+    });
+
+
+    $("input.checkbox").change(function(){
+        var items = $("input.checkbox[name='"+this.name+"']");
+        var answerSet = [];
+        for(var i=0;i<items.length;i++){
+            var item = items[i];
+            if(item.checked == "checked"){
+                answerSet.push(item.value);
+            }
+        }
+        var ib = this.id.split("_");
+        var data = {
+            token:bus.token,
+            answer:answerSet.join(","),
+            seq: this.name,
+            questionNo:ib[0]+"_"+ib[1]
+        };
+        fpost(url("exam/saveAnswer"),data);
+    });
+}
+function checkBlank(){
+    var msg={};
+    $("input.charpack,input.numpack,input.newSelect").each(function(){
+        if(this.value==undefined || this.value==""){
+            var key = this.id.split("_")[1].split(".")[1];
+            if(msg[key]==undefined){
+                msg[key]=0;
+            }
+            msg[key]++;
+        }
+    });
+    var names={};
+    $("input.radio,input.checkbox").each(function(){
+        names[this.name]=this.classList[0];
+    });
+    for(var i in names){
+        var isAnswer
+        var checked = $("input."+names[i]+"[name='"+i.replace(new RegExp( '\\.' , "g" ),"\\.")+"']:checked").length;
+        if(checked==0){
+            var key = $(
+                "input."+names[i]+"[name='"+i.replace(new RegExp( '\\.' , "g" ),"\\.")+"']"
+            )[0].id.split("_")[1].split(".")[1];
+            if(msg[key]==undefined){
+                msg[key]=0;
+            }
+            msg[key]++;
+        }
+    }
+    var msgtext=[];
+    for(var i in msg){
+        msgtext.push("第"+i+"题有"+msg[i]+"空未答");
+    }
+    if(msgtext.length>0){
+        return {
+            success:false,
+            msg:msgtext.join("\n")
+        };
+    }else{
+        return {
+            success:true
+        };
+    }
+
+}
+function meterstart(_this,img){
+    var param = 'meter_query.exe cid={cid} seq={seq} {args}'
+        .format({cid:$("#cid").html(),seq:$(_this).attr("data-seq"),args:$(_this).attr("data-param")});
+    jsobj.start(param);
+    var result = $post(url("exam/meterCallBack"),{token:bus.token,seq:$(_this).attr("data-seq")});
+    var data = result.data;
+    if(data.figure!=undefined){
+        if(img!=undefined)$("#"+img).attr("src",data.figure);
+        delete data.figure;
+    }
+}
+ 
+ var count =2;
+function submitQuestion(){
+    var ifFull = checkBlank();
+    if(ifFull.success){
+        window.wxc.xcConfirm(
+            "请确定是否已完成第"+cn_char[bus.outlineindex+1]+"模块的作答，不再修改",
+            window.wxc.xcConfirm.typeEnum.confirm,
+            {
+                title: "提示",
+                onOk: function(){
+                    window.wxc.xcConfirm(
+                        "再次提醒，提交后将不能再进行第"+cn_char[bus.outlineindex+1]+"模块的答题或修改,是否确定",
+                        window.wxc.xcConfirm.typeEnum.confirm,
+                        {
+                            title: "提示",
+                            onOk: function(){
+                                setTimeout(function() {
+                                    $get(url("exam/submitQuestion"), {token: bus.token});
+                                    if(bus.outlineindex == bus.outlineids.length-1) {
+                                        var result = fpost(url("exam/submitPaper"), {
+                                            token: bus.token
+                                        });
+                                        window.wxc.xcConfirm(
+                                            "交卷成功",
+                                            window.wxc.xcConfirm.typeEnum.info,
+                                            {
+                                                title: "提示",
+                                                onOk: function() {
+                                                    jsobj.closeClock();
+                                                    jsobj.exit();
+                                                }
+                                            }
+                                        );
+                                        return;
+                                    }
+                                    if(bus.outlineindex < bus.outlineids.length) {
+                                        bus.outlineid = bus.outlineids[++bus.outlineindex];
+                                        initRight();
+                                    }
+                                    if(bus.outlineindex == bus.outlineids.length-1) {
+                                        $("#submit").html("提交答案<br/>结束考试");
+                                    }
+                                    if(bus.outlineindex == bus.outlineids.length) {
+                                        $("#submit").remove();
+                                    }
+                                }, 1000);
+                            },
+                            onCancel:function(){}
+                        } );
+                },
+                onCancel:function(){}
+            }
+            );
+    }else{
+        window.wxc.xcConfirm(
+            "你尚有题目没有做完:\n"+ifFull.msg+"\n提交后将不能再完成这些题目的作答，是否确定？",
+            window.wxc.xcConfirm.typeEnum.confirm,
+            {
+                title: "提示",
+                onOk: function(){
+                    window.wxc.xcConfirm(
+                        "再次提醒，提交后将不能再进行第"+cn_char[bus.outlineindex+1]+"模块的答题或修改,是否确定",
+                        window.wxc.xcConfirm.typeEnum.confirm,
+                        {
+                            title: "提示",
+                            onOk: function(){
+                                setTimeout(function() {
+                                    $get(url("exam/submitQuestion"), {token: bus.token});
+                                    if(bus.outlineindex == bus.outlineids.length-1) {
+                                        var result = fpost(url("exam/submitPaper"), {
+                                            token: bus.token
+                                        });
+                                        window.wxc.xcConfirm(
+                                            "交卷成功",
+                                            window.wxc.xcConfirm.typeEnum.info,
+                                            {
+                                                title: "提示",
+                                                onOk: function() {
+                                                    jsobj.closeClock();
+                                                    jsobj.exit();
+                                                }
+                                            }
+                                        );
+                                        return;
+                                    }
+                                    if(bus.outlineindex < bus.outlineids.length) {
+                                        bus.outlineid = bus.outlineids[++bus.outlineindex];
+                                        initRight();
+                                    }
+                                    if(bus.outlineindex == bus.outlineids.length) {
+                                        $("#submit").remove();
+                                    }
+                                }, 1000);
+                            },
+                            onCancel:function(){}
+                        } );
+                },
+                onCancel:function(){}
+            }
+        );
+
+    }
+}
+function submitPaper(){
+    window.wxc.xcConfirm(
+        "是否交卷,交卷后将无法作答，且退出本客户端",
+        window.wxc.xcConfirm.typeEnum.confirm,
+        {
+            title: "提示",
+            onOk: function(){
+                setTimeout(function() {
+                    var result = fpost(url("exam/submitPaper"), {
+                        token: bus.token
+                    });
+                    window.wxc.xcConfirm(
+                        "交卷成功",
+                        window.wxc.xcConfirm.typeEnum.info,
+                        {
+                            title: "提示",
+                            onOk: function() {
+                                jsobj.closeClock();
+                                jsobj.exit();
+                            }
+                        }
+                     );
+                }, 1000);
+            },
+            onCancel:function(){}
+        });
+}
+function software(name){
+    jsobj.program(name,bus.time);
+}
+function openPage(_url,btn){
+    //截取appid
+//  .replace("=","='")+"'");papp_id=
+    var papp_id=eval("var "+_url.substring(_url.lastIndexOf("?")+1).replace("=","='")+"'");
+    var id = btn.id.split("_");
+    var seq = $(btn).attr("data-seq");
+    var result = $get(url("stu/thirdPartyPlatform"),{token:bus.token,seq:seq});
+    var recordId = result.data.recordId;
+    var name = result.data.name;
+    var codeName = encodeURI(name);
+    var paperId = result.data.paperId;
+    var questionId = result.data.questionId;
+    var keystr = "&record_id="+recordId
+        +"&name="+codeName
+        +"&paper_id="+paperId
+        +"&question_id="+questionId
+        +"&stud_left_time="+bus.time;
+        //+"&app_key="+bus.app_key;
+        
+        
+    var sign = md5("app_id="+ app_id + keystr + "&app_key="+bus.app_key);
+    var result_url = _url + keystr + "&sign=" + sign;
+    jsobj.openPage(result_url);
+}
+
+function showdd(){}

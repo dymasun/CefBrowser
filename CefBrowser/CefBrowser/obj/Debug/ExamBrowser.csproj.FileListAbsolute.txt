@@ -1,0 +1,80 @@
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.pdb
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csprojResolveAssemblyReference.cache
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Properties.Resources.resources
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.GenerateResource.Cache
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\Newtonsoft.Json.dll
+D:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Chrome.resources
+D:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\CefSharp.Core.dll
+D:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\CefSharp.dll
+D:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\bin\Debug\CefSharp.WinForms.dll
+d:\users\administrator\my document\visual studio 2013\Projects\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Alarm.resources
+E:\VS\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csprojAssemblyReference.cache
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Alarm.resources
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Chrome.resources
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Properties.Resources.resources
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.GenerateResource.cache
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.CoreCompileInputs.cache
+E:\VS\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe
+E:\VS\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.pdb
+E:\VS\ExamBrowser\ExamBrowser\bin\Debug\Newtonsoft.Json.dll
+E:\VS\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.CopyComplete
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.pdb
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csprojAssemblyReference.cache
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Alarm.resources
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Chrome.resources
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Properties.Resources.resources
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.GenerateResource.cache
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.CoreCompileInputs.cache
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.CopyComplete
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+C:\Users\Admin_w\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csprojAssemblyReference.cache
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Alarm.resources
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Chrome.resources
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Properties.Resources.resources
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.GenerateResource.cache
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.CoreCompileInputs.cache
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.pdb
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin_w\Desktop\12\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.CopyComplete
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.pdb
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csprojResolveAssemblyReference.cache
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Alarm.resources
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Chrome.resources
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Properties.Resources.resources
+C:\Users\sun\Desktop\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.GenerateResource.Cache
+D:\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+D:\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+D:\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+D:\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe
+D:\ExamBrowser\ExamBrowser\bin\Debug\ExamBrowser.pdb
+D:\ExamBrowser\ExamBrowser\bin\Debug\CefSharp.Core.dll
+D:\ExamBrowser\ExamBrowser\bin\Debug\CefSharp.dll
+D:\ExamBrowser\ExamBrowser\bin\Debug\CefSharp.WinForms.dll
+D:\ExamBrowser\ExamBrowser\bin\Debug\Newtonsoft.Json.dll
+D:\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Alarm.resources
+D:\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Chrome.resources
+D:\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.Properties.Resources.resources
+D:\ExamBrowser\ExamBrowser\obj\Debug\ExamBrowser.csproj.GenerateResource.Cache
+D:\CefBrowser\ExamBrowser\bin\Debug\ExamBrowser.exe.config
+D:\CefBrowser\ExamBrowser\obj\Debug\ExamBrowser.exe
+D:\CefBrowser\ExamBrowser\obj\Debug\ExamBrowser.pdb
+D:\CefBrowser\ExamBrowser\bin\Debug\CefBrowser.exe.config
